@@ -1,40 +1,111 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Portfolio Site with Theme Switching
 
-## Getting Started
+Build a responsive portfolio website using Next.js, React, and Tailwind CSS that supports dynamic theme switching (light and dark modes) and user preferences (e.g., font size, reduced motion). This project will utilize `useReducer` and `Context` for state management.
 
-First, run the development server:
+## Building Your Portfolio Site
+
+- **Hero Section**: Introduce yourself with a compelling headline and a brief bio.
+- **Projects Section**: Display your projects using cards or a grid layout. Each project should have a title, description, used tech and possibly a link to the live site or code repository.
+- **Contact Section**: Provide your professional contact information.
+
+[Example portfolio in figma](https://www.figma.com/community/file/1116246660507537002)
+
+## Setup Project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Edit `tailwind.config.js` to enable dark mode:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```javascript
+module.exports = {
+  darkMode: "class",
+  // other configurations...
+};
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## ThemeContext and ThemeProvider
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Create `ThemeContext.js` to manage theme and user preferences:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```javascript
+import React, { createContext, useContext, useReducer } from "react";
 
-## Learn More
+const ThemeContext = createContext();
 
-To learn more about Next.js, take a look at the following resources:
+const initialState = {
+  theme: "light",
+  userPreferences: {
+    fontSize: "medium",
+    reduceAnimations: false,
+  },
+};
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+function themeReducer(state, action) {
+  // your code here
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+export const ThemeProvider = ({ children }) => {
+  // your code here
+};
 
-## Deploy on Vercel
+// Create and use your own hook instead of using useContext in the components
+export const useTheme = () => useContext(ThemeContext);
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Applying the Theme Dynamically
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+In tailwind dark or light mode is set by adding or removing a class called `dark` in the root html tag. Use `ThemeContext` in `_app.js` to apply the theme class to the root element:
+
+```javascript
+import { useEffect } from "react";
+import { ThemeProvider, useTheme } from "../contexts/ThemeContext";
+import "../styles/globals.css";
+
+function MyApp({ Component, pageProps }) {
+  const { state } = useTheme();
+
+  useEffect(() => {
+    // Your code here. Add the dark class to the <html /> tag
+    // with vanilla js.
+  }, [state.theme]);
+
+  return <Component {...pageProps} />;
+}
+
+export default ({ Component, pageProps }) => (
+  <ThemeProvider>
+    <MyApp Component={Component} pageProps={pageProps} />
+  </ThemeProvider>
+);
+```
+
+## Creating the ThemeSwitcher and Handling User Preferences
+
+Implement a component to toggle the theme and adjust user preferences:
+
+## Using User Preferences in Components
+
+Demonstrate using `userPreferences` in a component, adjusting styles based on the context state:
+
+## Hand in Assignment
+
+1. Initialize a git repository in your project if you haven't already.
+2. Create a repository on GitHub and push your project there.
+3. Submit the link to your GitHub repository on Canvas.
+
+## :books: Reading List
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Context](https://reactjs.org/docs/context.html)
+- [React useReducer Hook](https://reactjs.org/docs/hooks-reference.html#usereducer)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+### :boom: Success!
+
+Completing this assignment will significantly enhance your understanding of state management in React using `useReducer` and `Context`. You'll also gain more experience with Next.js, creating more dynamic and interactive web applications.
+
+### :runner: Stretch goals
+
+Add one or two more color schemes to your theme.
