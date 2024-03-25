@@ -29,7 +29,7 @@ module.exports = {
 
 Create `ThemeContext.js` to manage theme and user preferences:
 
-```javascript
+````javascript
 import React, { createContext, useContext, useReducer } from "react";
 
 const ThemeContext = createContext();
@@ -52,7 +52,7 @@ export const ThemeProvider = ({ children }) => {
 
 // Create and use your own hook instead of using useContext in the components
 export const useTheme = () => useContext(ThemeContext);
-```
+```git
 
 ## Applying the Theme Dynamically
 
@@ -79,7 +79,7 @@ export default ({ Component, pageProps }) => (
     <MyApp Component={Component} pageProps={pageProps} />
   </ThemeProvider>
 );
-```
+````
 
 ## Creating the ThemeSwitcher and Handling User Preferences
 
@@ -88,24 +88,3 @@ Implement a component to toggle the theme and adjust user preferences:
 ## Using User Preferences in Components
 
 Demonstrate using `userPreferences` in a component, adjusting styles based on the context state:
-
-## Hand in Assignment
-
-1. Initialize a git repository in your project if you haven't already.
-2. Create a repository on GitHub and push your project there.
-3. Submit the link to your GitHub repository on Canvas.
-
-## :books: Reading List
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Context](https://reactjs.org/docs/context.html)
-- [React useReducer Hook](https://reactjs.org/docs/hooks-reference.html#usereducer)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-
-### :boom: Success!
-
-Completing this assignment will significantly enhance your understanding of state management in React using `useReducer` and `Context`. You'll also gain more experience with Next.js, creating more dynamic and interactive web applications.
-
-### :runner: Stretch goals
-
-Add one or two more color schemes to your theme.
