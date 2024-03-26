@@ -21,7 +21,7 @@ function ThemeSwitcher() {
   }
 
   return (
-    <div className="flex justify-evenly text-2xl mt-5 pt-20 mt-20 dark:bg-black dark:text-white ">
+    <div className="flex justify-evenly text-2xl pt-20 mt-20 dark:bg-black dark:text-white ">
       <button onClick={toggleTheme}>
         Switch Theme: {state.theme === "dark" ? "Light" : "Dark"}
       </button>
