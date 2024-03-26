@@ -19,15 +19,19 @@ export default function ProjectSection() {
   ];
 
   return (
-    <div className="flex flex-col justify-center items-center mt-20">
-      <div className="grid gap-4 grid-cols-1 ">
+    <div className="flex flex-col justify-center items-center mt-20 py-20 dark:bg-black ">
+      <div className="grid gap-4 grid-cols-1 dark:bg-black">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg hover: shadow-md p-4 m-4 transform transition duration-300 hover:scale-105"
+            className="bg-white rounded-lg hover: shadow-md p-4 m-4 transform transition duration-300 hover:scale-105 dark:bg-black dark:text-white dark:shadow-white"
           >
-            <h3 className="text-3xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-gray-700">{project.description}</p>
+            <h3 className="text-3xl font-semibold mb-2 dark:bg-black dark:text-white ">
+              {project.title}
+            </h3>
+            <p className="text-gray-700 text-3xl dark:bg-black dark:text-white">
+              {project.description}
+            </p>
             <a
               href={project.githubLink}
               target="_blank"
